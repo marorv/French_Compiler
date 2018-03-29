@@ -7,16 +7,16 @@ I wish to test the above claims as for whether or not the compiler is capable of
 This requires the compiler being able to go through the following phases:
 
 1. Lexical Analysis
-	-Verifies whether or not lexemes are valid French words, and identifies their class.
-	-Outputs token stream.
+	- Verifies whether or not lexemes are valid French words, and identifies their class.
+	- Outputs token stream.
 
 2. Syntax Analysis
-	-Verifies whether or not lexemes form grammatically valid French sentence; i.e. correct word order.
-	-Outputs syntax tree.
+	- Verifies whether or not lexemes form grammatically valid French sentence; i.e. correct word order.
+	- Outputs syntax tree.
 
 3. Semantic Analysis
-	-Verifies whether or not the grammatically correct sentence actually makes sense*.
-	-Outputs syntax tree.
+	- Verifies whether or not the grammatically correct sentence actually makes sense*.
+	- Outputs syntax tree.
 
 *This is an AI issue, and probably not one I will take on.
 
