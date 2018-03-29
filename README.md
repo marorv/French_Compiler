@@ -3,7 +3,7 @@
 There are claims that the 75 most common words in a language make up 40% of occurrences in said language; the 200 most common make up 50%, 524 most common words in a language make up 60%, etc. ("5 Steps to Speak a New Language", Hung Quang Pham).
 
 Using general compiler principles, my goal is to verify an input French sentence as grammatically correct or not, and build a syntax tree. 
-I wish to test the above claims as for whether or not the compiler is capable of a hitrate (produce correct syntax trees) in said percentage range given the corresponding number of words as learning set. 
+I wish to test the above claims as for whether or not the compiler is capable of a hit rate (produce correct syntax trees) in said percentage range given the corresponding number of words as learning set. 
 This requires the compiler being able to go through the following phases:
 
 1. Lexical Analysis
