@@ -21,7 +21,7 @@ This requires the compiler being able to go through the following phases:
 *This is an AI issue, and probably not one I will take on.
 
 Giving tokens attributes depending on their class, it should be possible to verify them as grammatically correct.
-Consider the example "la bleue maison est belle". The phrase needs an attribute indicating that it's subject is a feminine noun in the third person, deciding that the verb in the predicate should be conjugated in the corresponding person, and that the adjective should be singular and feminine, as well as the subject complement (*attribut du sujet*), giving something along the lines of 
+Consider the example *la petite maison est belle*. The phrase needs an attribute indicating that it's subject is a feminine noun in the third person, deciding that the verb in the predicate should be conjugated in the corresponding person, and that the adjective should be singular and feminine, as well as the subject complement (*attribut du sujet*), giving something along the lines of 
 
 ```
 phrase.sujet.GN.noun.gender = feminine;
