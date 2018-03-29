@@ -4,6 +4,10 @@
 typedef struct D D;
 typedef struct GN GN;
 typedef struct Phrase Phrase;
+typedef struct Lexeme Lexeme;
+
+void printPhrase(Phrase inpPhr);
+void printStruct(Phrase inpPhr);
 
 //Determinants
 struct D { 
@@ -16,14 +20,16 @@ struct GN {
 	char nom[50];
 };
 
-struct Phrase { //defining identifier "struct Phrase" within struct name space
+struct Phrase {
 	char structure[50];
    	GN sujet;
    	char verbal[50];
    	GN objet;
-}; //add type alias in global name space, allowing Phrase p, not struct Phrase p
+}; 
 
-void printPhrase(Phrase inpPhr);
-void printStruct(Phrase inpPhr);
+struct Lexeme { //This will be IR - determine type an them convert to structs of nouns, determinants, ...
+	char word[50];
+	char word_class[50];
+};
 
 #endif

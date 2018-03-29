@@ -12,4 +12,5 @@ frenchComp: $(OBJ)
 
 .PHONY : clean
 clean : $(OBJ)
-	-rm $^
+	rm $^
+	rm frenchComp
