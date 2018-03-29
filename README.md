@@ -1,8 +1,8 @@
 # French_Compiler
 
-There are claims that the 75 most common words in a language make up 40% of occurrences in said language; the 200 most common make up 50%, 524 most common words in a language make up 60%, etc. ("5 Steps to Speak a New Language", Hung Quang Pham).
+There are claims that the 75 most common words in a language make up 40% of occurrences in said language; the 200 most common make up 50%, 524 make up 60%, etc. ("5 Steps to Speak a New Language", Hung Quang Pham).
 
-Using general compiler principles, my goal is to verify an input French sentence as grammatically correct or not, and build a syntax tree. 
+Using general compiler principles, my goal is to verify an input French sentence as grammatically correct or not, and build a syntax tree around it. 
 I wish to test the above claims as for whether or not the compiler is capable of a hit rate (produce correct syntax trees) in said percentage range given the corresponding number of words as learning set. 
 This requires the compiler being able to go through the following phases:
 
@@ -21,7 +21,7 @@ This requires the compiler being able to go through the following phases:
 *This is an AI issue, and probably not one I will take on.
 
 Giving tokens attributes depending on their class, it should be possible to verify them as grammatically correct.
-Consider the example *la petite maison est belle*. The phrase needs an attribute indicating that it's subject is a feminine noun in the third person, deciding that the verb in the predicate should be conjugated in the corresponding person, and that the adjective should be singular and feminine, as well as the subject complement (*attribut du sujet*), giving something along the lines of 
+Consider the example *la petite maison est belle*. The phrase needs an attribute indicating that it's subject is a feminine noun in third person singular, deciding that the verb in the predicate should be conjugated in the corresponding person, and that the adjective should be singular and feminine, as well as the subject complement (*attribut du sujet*), giving something along the lines of 
 
 ```
 phrase.sujet.GN.noun.gender = feminine;
