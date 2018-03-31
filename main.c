@@ -43,7 +43,6 @@ int main( int argc, char *argv[] )  {
 	const char* extrEntryFrmCSV(char *s, int entry){ 
 		int i = 0;				// Current char in the CSVline
 		int j = 0;				// current char in the current entry
-		int entry_commas = 0; 	// to parse to find the correct entry
 		char *word = malloc (sizeof (char) * 20); //This isn't freed up anywhere?
 		char temp;
 			
@@ -62,6 +61,7 @@ int main( int argc, char *argv[] )  {
 				}
 			}
 		}
+		free(word); //If function returns in line 56, this is unreachable, so word never freed?
 	}
 
 	//Compare lexeme with database entries, return 0 if match found in DB, -1 otherwise
@@ -69,18 +69,19 @@ int main( int argc, char *argv[] )  {
 		char filename[50] = "grammar_classes/nouns.csv"; 
 		char comp_word[20]; 
 
-	    FILE* stream = fopen(filename, "r");
-	    if (stream){
-		    char line[1024];
+		FILE* stream = fopen(filename, "r");
+		if (stream){
+			char line[1024];
 
-		    while (fgets(line, 1024, stream))
-		    {
-		        char* tmp = strdup(line);
-		        if (strcmp(lex, extrEntryFrmCSV(tmp, 0)) == 0) { // <0:	first unmatching character has lower value in ptr1 than ptr2, 0: contents equal
-		        	return 0;
-		        } 
-		        free(tmp);
-		    }
+			while (fgets(line, 1024, stream))
+		 	{
+				char* tmp = strdup(line);
+				// strcmp return values: <0 = first unmatching character has lower value in ptr1 than ptr2, 0 = contents equal
+				if (strcmp(lex, extrEntryFrmCSV(tmp, 0)) == 0) { 
+					return 0;
+				}
+				free(tmp);
+			}
 		} else
 		{
 			printf("%s\n", "Could not open file.");

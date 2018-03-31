@@ -22,9 +22,9 @@ struct GN {
 
 struct Phrase {
 	char structure[50];
-   	GN sujet;
-   	char verbal[50];
-   	GN objet;
+	GN sujet;
+	char verbal[50];
+	GN objet;
 }; 
 
 struct Lexeme { //This will be IR - determine type an them convert to structs of nouns, determinants, ...
