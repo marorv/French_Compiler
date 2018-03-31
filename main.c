@@ -33,20 +33,18 @@ int main( int argc, char *argv[] )  {
 				lexemes[k].word[j] = temp;
 				j++;
 			} else {
-				//printf("%s\n", lexemes[k].word);
 				j = 0;
 				k++;
 			}
 		}
 
-	free(lexemes);
 
 	//Extract entry nr entry from the CSV line s
 	const char* extrEntryFrmCSV(char *s, int entry){ 
 		int i = 0;				// Current char in the CSVline
 		int j = 0;				// current char in the current entry
 		int entry_commas = 0; 	// to parse to find the correct entry
-		char *word = malloc (sizeof (char) * 20);
+		char *word = malloc (sizeof (char) * 20); //This isn't freed up anywhere?
 		char temp;
 			
 		for (i = 0; i < strlen(s); i++) {
@@ -63,28 +61,49 @@ int main( int argc, char *argv[] )  {
 					entry--;
 				}
 			}
-
 		}
-		
 	}
 
-	char filename[50] = "grammar_classes/nouns.csv"; 
-    FILE* stream = fopen(filename, "r");
-    if (stream){
-        //printf("%s\n", "Opened /grammar_classes/nouns.csv");
-	    char line[1024];
+	//Compare lexeme with database entries, return 0 if match found in DB, -1 otherwise
+	int cmprLxmWthDB(char *lex){ 
+		char filename[50] = "grammar_classes/nouns.csv"; 
+		char comp_word[20]; 
 
-	    while (fgets(line, 1024, stream))
-	    {
-	        char* tmp = strdup(line);
-	        printf("%s \"%s\"\n", "Extracted the entry:", extrEntryFrmCSV(tmp, 0));
-	        free(tmp);
-	    }
-	} else
-	{
-		printf("%s\n", "Could not open file.");
+	    FILE* stream = fopen(filename, "r");
+	    if (stream){
+		    char line[1024];
+
+		    while (fgets(line, 1024, stream))
+		    {
+		        char* tmp = strdup(line);
+		        if (strcmp(lex, extrEntryFrmCSV(tmp, 0)) == 0) { // <0:	first unmatching character has lower value in ptr1 than ptr2, 0: contents equal
+		        	return 0;
+		        } 
+		        free(tmp);
+		    }
+		} else
+		{
+			printf("%s\n", "Could not open file.");
+		}
+		fclose(stream);
+		return -1;
 	}
-	fclose(stream);
+
+	void classifyLexemes () {
+		for (i = 0; i <= k; i++){ //Not sure how to determine k yet
+			//Ugly hard coding, but just testing
+
+			printf("%s \"%s\" \n", "Trying to classify", lexemes[i].word);
+			if (cmprLxmWthDB(lexemes[i].word) == 0) { 
+				strcpy(lexemes[i].word_class, "noun");
+			}
+
+			printf("%s (%s)\n", lexemes[i].word, lexemes[i].word_class);
+		}
+	}
+
+	classifyLexemes();
+	free(lexemes);
 
 	/*
 	strcpy(test.sujet.nom, "je");
