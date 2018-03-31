@@ -39,10 +39,52 @@ int main( int argc, char *argv[] )  {
 			}
 		}
 
-	for (i = 0; i <= k; i++) {
-		printf("%s\n", lexemes[i].word);
-	}
 	free(lexemes);
+
+	//Extract entry nr entry from the CSV line s
+	const char* extrEntryFrmCSV(char *s, int entry){ 
+		int i = 0;				// Current char in the CSVline
+		int j = 0;				// current char in the current entry
+		int entry_commas = 0; 	// to parse to find the correct entry
+		char *word = malloc (sizeof (char) * 20);
+		char temp;
+			
+		for (i = 0; i < strlen(s); i++) {
+			temp = s[i];
+			if (entry == 0){
+				if (temp != ',' && temp != ' ') {
+					word[j] = temp;
+					j++;
+				} if (temp == ',') {
+					return word;
+				}
+			} else {
+				if (temp == ','){
+					entry--;
+				}
+			}
+
+		}
+		
+	}
+
+	char filename[50] = "grammar_classes/nouns.csv"; 
+    FILE* stream = fopen(filename, "r");
+    if (stream){
+        //printf("%s\n", "Opened /grammar_classes/nouns.csv");
+	    char line[1024];
+
+	    while (fgets(line, 1024, stream))
+	    {
+	        char* tmp = strdup(line);
+	        printf("%s \"%s\"\n", "Extracted the entry:", extrEntryFrmCSV(tmp, 0));
+	        free(tmp);
+	    }
+	} else
+	{
+		printf("%s\n", "Could not open file.");
+	}
+	fclose(stream);
 
 	/*
 	strcpy(test.sujet.nom, "je");
