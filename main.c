@@ -18,7 +18,7 @@ int main( int argc, char *argv[] )  {
 
 	Phrase test;
 
-	strcpy(str, "je vois le chien");
+	strcpy(str, "le chat voit les chiens");
 	
 	int i;		//For the length of the phrase itself
 	int j = 0;	//For the number of the current letter in the current word
@@ -64,7 +64,7 @@ int main( int argc, char *argv[] )  {
 		free(word); //If function returns in line 56, this is unreachable, so word never freed?
 	}
 
-	//Compare lexeme with database entries, return 0 if match found in DB, -1 otherwise
+	//Compare lexeme with database entries, return 0 if match found in DB, -1 elsewise
 	int cmprLxmWthDB(char *lex){ 
 		char filename[50] = "grammar_classes/nouns.csv"; 
 		char comp_word[20]; 
@@ -77,7 +77,8 @@ int main( int argc, char *argv[] )  {
 		 	{
 				char* tmp = strdup(line);
 				// strcmp return values: <0 = first unmatching character has lower value in ptr1 than ptr2, 0 = contents equal
-				if (strcmp(lex, extrEntryFrmCSV(tmp, 0)) == 0) { 
+				//column 0 is singular, column 1 is plural
+				if (strcmp(lex, extrEntryFrmCSV(tmp, 0)) == 0 || strcmp(lex, extrEntryFrmCSV(tmp, 1)) == 0) { 
 					return 0;
 				}
 				free(tmp);
@@ -94,7 +95,7 @@ int main( int argc, char *argv[] )  {
 		for (i = 0; i <= k; i++){ //Not sure how to determine k yet
 			//Ugly hard coding, but just testing
 
-			printf("%s \"%s\" \n", "Trying to classify", lexemes[i].word);
+			//printf("%s \"%s\" \n", "Trying to classify", lexemes[i].word);
 			if (cmprLxmWthDB(lexemes[i].word) == 0) { 
 				strcpy(lexemes[i].word_class, "noun");
 			}
