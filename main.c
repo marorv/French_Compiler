@@ -40,7 +40,7 @@ int main( int argc, char *argv[] )  {
 
 
 	//Extract entry nr entry from the CSV line s
-	const char* extrEntryFrmCSV(char *s, int entry){ 
+	char* extrEntryFrmCSV(char *s, int entry){ 
 		int i = 0;				// Current char in the CSVline
 		int j = 0;				// current char in the current entry
 		char *word = malloc (sizeof (char) * 20); //This isn't freed up anywhere?
@@ -68,6 +68,7 @@ int main( int argc, char *argv[] )  {
 	int cmprLxmWthDB(char *lex){ 
 		char filename[50] = "grammar_classes/nouns.csv"; 
 		char comp_word[20]; 
+		strcpy(comp_word, lex);
 
 		FILE* stream = fopen(filename, "r");
 		if (stream){
@@ -76,9 +77,14 @@ int main( int argc, char *argv[] )  {
 			while (fgets(line, 1024, stream))
 		 	{
 				char* tmp = strdup(line);
+				char* sg = extrEntryFrmCSV(tmp, 0);
+				char* pl = extrEntryFrmCSV(tmp, 1);
 				// strcmp return values: <0 = first unmatching character has lower value in ptr1 than ptr2, 0 = contents equal
 				//column 0 is singular, column 1 is plural
-				if (strcmp(lex, extrEntryFrmCSV(tmp, 0)) == 0 || strcmp(lex, extrEntryFrmCSV(tmp, 1)) == 0) { 
+				if (strcmp(comp_word, sg) == 0 || strcmp(comp_word, pl) == 0) { 
+					free(tmp);
+					free(sg);
+					free(pl);
 					return 0;
 				}
 				free(tmp);
@@ -91,20 +97,20 @@ int main( int argc, char *argv[] )  {
 		return -1;
 	}
 
-	void classifyLexemes () {
-		for (i = 0; i <= k; i++){ //Not sure how to determine k yet
+	void classifyLexemes (Lexeme *phrase, int size) {
+		for (i = 0; i <= size; i++){
 			//Ugly hard coding, but just testing
 
-			//printf("%s \"%s\" \n", "Trying to classify", lexemes[i].word);
-			if (cmprLxmWthDB(lexemes[i].word) == 0) { 
-				strcpy(lexemes[i].word_class, "noun");
+			printf(" ");
+			if (cmprLxmWthDB(phrase[i].word) == 0) { 
+				strcpy(phrase[i].word_class, "noun");
 			}
 
-			printf("%s (%s)\n", lexemes[i].word, lexemes[i].word_class);
+			printf("%s (%s)\n", phrase[i].word, phrase[i].word_class);
 		}
 	}
 
-	classifyLexemes();
+	classifyLexemes(lexemes, k);
 	free(lexemes);
 
 	/*
