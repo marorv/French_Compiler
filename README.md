@@ -36,6 +36,8 @@ phrase.predicat.AS.adj.number = phrase.sujet.GN.noun.number;
 
 ```
 
+This could possibly be implemented using Markov Chains and Viterbi. I'm still planning this stage.
+
 ## Issues I'm aware of
 
 - #### Language is immensely large. 
@@ -48,3 +50,5 @@ AI and immense data sets is the best way to teach a machine languages. However, 
 
 - #### Ambiguity is an issue both in programming language compilers as well as human languages
 Does "I am watching the elephant with binoculars" mean that you are watching an elephant by the means of using binoculars, or are you watching an elephant wearing binoculars? Context usually decides this problem, but as for a compiler, the solution lies in deciding on one interpretation as preferred.
+
+Certain words also have double meanings, like *Cet homme est fier; peut-on s'y fier?*. However, this boils down to pattern matching, and Markv chains could determine that the first instance of *fier* is far more likely to be an adjective, whereas the second ought to be a verb.
